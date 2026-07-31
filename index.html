@@ -49,7 +49,7 @@ button{
 }
 
 .quran{
-    font-size:26px;
+    font-size:24px;
     line-height:2;
     margin:25px 0;
 }
@@ -84,8 +84,8 @@ button{
 <body>
 
 <div id="cover">
-    <h1>جاهز لتشاركنا فرحتنا؟🎀</h1>
-    <button onclick="openInvite()"> 💌افتح الدعوة</button>
+    <h1>🎀جاهز لتشاركنا فرحتنا؟</h1>
+    <button onclick="openInvite()">💌افتح الدعوة</button>
 </div>
 
 <div id="invitation">
@@ -93,8 +93,9 @@ button{
 <h2>بسم الله الرحمن الرحيم</h2>
 
 <div class="quran">
-    وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا<br>
-    لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا<br>
+لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+
 </div>
 
 <div class="names">
@@ -111,8 +112,116 @@ button{
 
 <div class="map">
 <a href="https://maps.app.goo.gl/FfRYS5rkNzdHVsYu9" target="_blank">
-Location 📍
+    Location 📍
 </a>
 </div>
 
 </div>
+<!-- الصوت الخلفي -->
+<audio id="quranAudio" loop>
+    <source src="quran.mp3" type="audio/mpeg">
+</audio>
+
+
+<style>
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+    radial-gradient(circle,rgba(184,134,69,.15) 2px,transparent 2px);
+    background-size:40px 40px;
+    pointer-events:none;
+}
+
+#invitation{
+    animation:fade 2s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+.names{
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 5px #b88645;
+    }
+    to{
+        text-shadow:0 0 20px #b88645;
+    }
+}
+
+
+.flower{
+    position:fixed;
+    top:-50px;
+    font-size:25px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+
+</style>
+
+
+<script>
+
+function openInvite(){
+
+    document.getElementById("cover").style.display="none";
+
+    document.getElementById("invitation").style.display="block";
+
+    let audio=document.getElementById("quranAudio");
+
+    audio.play();
+
+    createFlowers();
+
+}
+
+
+function createFlowers(){
+
+    for(let i=0;i<25;i++){
+
+        let f=document.createElement("div");
+
+        f.className="flower";
+
+        f.innerHTML="🌸";
+
+        f.style.left=Math.random()*100+"%";
+
+        f.style.animationDuration=
+        (5+Math.random()*8)+"s";
+
+        f.style.animationDelay=
+        Math.random()*5+"s";
+
+        document.body.appendChild(f);
+
+    }
+
+}
+
+</script>
+</body>
+</html>
